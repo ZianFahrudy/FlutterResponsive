@@ -54,11 +54,32 @@ class CoursePage extends StatelessWidget {
       ),
       body: ListView(
         children: [
-          Image.network(
-            'https://miro.medium.com/max/1400/0*mqtaZBdbJvp2H6mZ.jpg',
+          Container(
             width: double.infinity,
-            fit: BoxFit.cover,
+            height: 300,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(
+                    'https://miro.medium.com/max/1400/0*mqtaZBdbJvp2H6mZ.jpg'),
+                fit: BoxFit.fill,
+              ),
+            ),
+            child: Center(
+              child: Text('About Course',
+                  style: TextStyle(
+                      fontSize: ResponsiveValue(context,
+                          defaultValue: 60.0,
+                          valueWhen: [
+                        const Condition.smallerThan(name: MOBILE, value: 40),
+                        const Condition.largerThan(name: TABLET, value: 120)
+                      ]).value)),
+            ),
           ),
+          // Image.network(
+          //   'https://miro.medium.com/max/1400/0*mqtaZBdbJvp2H6mZ.jpg',
+          //   width: double.infinity,
+          //   fit: BoxFit.cover,
+          // ),
           ResponsiveRowColumn(
             rowMainAxisAlignment: MainAxisAlignment.center,
             rowPadding: const EdgeInsets.all(30),
@@ -87,6 +108,7 @@ class CoursePage extends StatelessWidget {
                       ),
                       Text(courses[index].title),
                       Text(courses[index].description),
+                      
                     ],
                   ),
                 ),
